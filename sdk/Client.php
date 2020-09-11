@@ -15,9 +15,6 @@ class Client
 {
     private $base_url;
     private $token_client;
-    private $client_id;
-    private $client_secret;
-    private $test_mode;
     private $api_client;
     private $codes = array(
         '100' => 'Continue',
@@ -89,6 +86,11 @@ class Client
     public function create_checkout($createCheckoutBody) // @codingStandardsIgnoreLine
     {
         return $this->api_client->execute($this->base_url . "/v2/checkouts", "POST", $createCheckoutBody);
+    }
+
+    public function create_invoice_checkout($createCheckoutBody) // @codingStandardsIgnoreLine
+    {
+        return $this->api_client->execute($this->base_url . "/v1/invoiceCheckouts", "POST", $createCheckoutBody);
     }
 
     /**
