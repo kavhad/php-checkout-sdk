@@ -5,7 +5,8 @@
 * [Change log](#change_log)
 * [Available methods](#available_methods)
   * [Calculate Monthly Cost](#calculate_monthly_cost)
-  * [Create Checkout](#create_checkout)
+  * [Create Invoice Checkout](#create_invoice_checkout)
+  * [Create Leasing Checkout](#create_checkout)
   * [Validate Financed Amount](#validate_financed_amount)
   * [Get Monthly Cost Widget](#get_monthly_cost_widget)
   * [Get Order](#get_order)  
@@ -181,6 +182,22 @@ $response->data
   ]
 }
 ```
+
+
+
+### <a name="create_invoice_checkout"></a>Create Invoice Checkout
+
+The Checkout is inserted as a Payment Method in the checkout. It could be used either with or without input fields for address. Post the cart to Create Checkout to initiate the checkout.
+
+An alternative use case for the Checkout is as a complete checkout if there is no need for other payment methods.
+
+```
+public function create_invoice_checkout({CHECKOUT})
+```
+
+#### Parameters
+
+__Todo add documentation__
 
 ### <a name="create_checkout"></a>Create Checkout
 
