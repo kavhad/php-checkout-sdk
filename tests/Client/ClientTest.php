@@ -5,18 +5,26 @@ namespace Client;
 use PHPUnit\Framework\TestCase;
 
 use Sdk\Client;
+use Sdk\ClientFactory;
 
 class ClientTest extends TestCase
 {
 
+    public function test_ClientFactory_create() {
+        $client = ClientFactory::CreateClient(getenv('clientId'), getenv('clientSecret'), true);
+        $response = $client->create_invoice_checkout($this->createInvoiceCheckoutPayload());
+        $this->assertTrue($response->__get("statusCode") == 201);
+    }
+
     public function test_CreateInvoiceCheckout()
     {
 
-        $client = new Client(getenv('clientId'), getenv('clientSecret'), true);
-
+        $client = new Client(getenv('clientId'), getenv('clientSecret'),
+            'test_base_url',
+            'test_access_token_url',
+            true);
         $response = $client->create_invoice_checkout($this->createInvoiceCheckoutPayload());
-
-        $this->assertTrue($response->__get("statusCode") >= 200 && $response->__get("statusCode") < 300);
+        $this->assertTrue($response->__get("statusCode") == 201);
 
     }
 

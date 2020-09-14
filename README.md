@@ -61,9 +61,11 @@ This documentation is about the PHP SDK for communicating with Wasa Kredit check
 You can apply to receive Partner credentials by sending a mail to [ehandel@wasakredit.se](mailto:ehandel@wasakredit.se).
 
 ### Initialization
-
-Initialize the main *Client* class by passing in your issued *Client ID* and *Client Secret*.
-You can optionally supply a *Test Mode* parameter which is by default is set to true.
+Initialize the main *Client* class by calling the ClientFactory::Create(...) method passing in 
+your issued *Client ID* and *Client Secret*.
+You can optionally supply a *Test Mode* parameter which is by default is set to true which 
+indicates the target is our test environment, to target production environment set *Test Mode* to false. 
+The provided client id and secret must exists on the targeted environment.
 
 ```
  /**
@@ -75,7 +77,7 @@ You can optionally supply a *Test Mode* parameter which is by default is set to 
   * @return Client
   */  
 
-new Client({CLIENT ID}, {CLIENT SECRET}, {TEST MODE})
+ClientFactory::Create({CLIENT ID}, {CLIENT SECRET}, {TEST MODE})
 ```
 
 ### Client
@@ -85,7 +87,7 @@ Orchestrates the main flow. *Client* will fetch and store an access token upon a
 #### Example
 
 ```
-$this->_client = new Client(clientId, clientSecret, testMode);
+$this->_client = ClientFactory::Create(clientId, clientSecret, testMode);
 ```
 
 #### Parameters
