@@ -1,4 +1,4 @@
-# Wasa Kredit Client PHP SDK v3.0
+w# Wasa Kredit Client PHP SDK v3.0
 
 **Table of Content**
 
@@ -73,9 +73,11 @@ This documentation is about the PHP SDK for communicating with Wasa Kredit check
 You can apply to receive Partner credentials by sending a mail to [ehandel@wasakredit.se](mailto:ehandel@wasakredit.se).
 
 ### Initialization
-
-Initialize the main Client class by using the provided factory method ClientFactory.CreateClient and provide your issued
-*Client ID* and *Client Secret*. You can optionally supply a *Test Mode* parameter. It will be default set to True, so for production purposes you will need to set the *Test mode* parameter to False. You will be provided ClientId and ClientSecret for testing purposes as well, so when creating client for testing purposes, you will need to provide those values and set the *Test Mode* parameter to True.  
+Initialize the main *Client* class by calling the ClientFactory::Create(...) method passing in
+your issued *Client ID* and *Client Secret*.
+You can optionally supply a *Test Mode* parameter which is by default is set to true which
+indicates the target is our test environment, to target production environment set *Test Mode* to false.
+The provided client id and secret must exists on the targeted environment.
 
 ```
  /**
@@ -87,7 +89,7 @@ Initialize the main Client class by using the provided factory method ClientFact
   * @return Client
   */  
 
-new Client({CLIENT ID}, {CLIENT SECRET}, {TEST MODE})
+ClientFactory::Create({CLIENT ID}, {CLIENT SECRET}, {TEST MODE})
 ```
 
 ### Client
@@ -97,7 +99,7 @@ Orchestrates the main flow. *Client* will fetch and store an access token upon a
 #### Example
 
 ```
-$this->_client = new Client(clientId, clientSecret);
+$this->_client = ClientFactory::Create(clientId, clientSecret, testMode);
 ```
 
 #### Parameters
@@ -106,6 +108,7 @@ $this->_client = new Client(clientId, clientSecret);
 |---|---|---|
 | clientId | *string* (required) | The client id that has been issued by Wasa Kredit |
 | clientSecret | *string* (required) | Your client secret issued by Wasa Kredit |
+| testMode | *boolean* | A boolean value if SDK should make requests in test mode or not |
 
 ## <a name="available_methods"></a>Available methods
 
@@ -323,7 +326,7 @@ Optionally, you're able to pass an options object to the `init`-function. Use th
       },
       onRedirect: function(orderReferences){
         //[...]
-      },
+      },:
       onCancel: function(orderReferences){
         //[...]
       }
